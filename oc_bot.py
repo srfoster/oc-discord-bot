@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+import configparser
+
 intents = discord.Intents.default()
 intents.message_content = True
 intents.guilds = True
@@ -50,6 +52,8 @@ async def create_course(ctx, course_name:str):
 #    if content.startswith('$hello'):
 #        await message.channel.send('Hello!')
 
+config = configparser.ConfigParser()
+config.read(".secrets")
 
-
-client.run('MTE4NDIyMTcxMTMxMTMxMDg1MQ.G3LTSj.K7dPwiX8wfTTzoJhi4RQ5EFhkzxogFtmZDyLkM')
+token = config["DEFAULT"]["DISCORD_TOKEN"]
+client.run(token)
