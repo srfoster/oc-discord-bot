@@ -54,6 +54,22 @@ async def create_course(ctx, course_name:str):
     # Create a new text channel
     new_channel = await ctx.guild.create_text_channel(name=course_name, category=category)
     await ctx.send(f'Channel `{new_channel.name}` has been created.')
+    
+    # Define the permissions you want to set
+    permissions = {
+        'view_channel': True, # Allow to view channel
+        'send_messages': True, # Allow sending messages
+        'send_messages_in_threads': True, # Allow sending messages
+        'embed_links': True, # Allow embedding links
+        'attach_files': True, # Allow attaching files
+        'add_reactions': True, # Allow adding reactions
+        'read_message_history': True, # Allow reading message history
+    }
+
+    # Apply the permissions to the role in the channel
+    await new_channel.set_permissions(new_role, **permissions)
+    await ctx.send(f'Channel `{new_channel.name}` permissions have been set.')
+    
 
 
 #@client.event
